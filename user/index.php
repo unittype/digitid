@@ -5,6 +5,7 @@ $session_id = session_id();
 include('load.php');
 
 if (isset($_SESSION['username'])) {
+		//unset($_SESSION['username']);
 		header('location: main/');
 }
 ?>
@@ -33,17 +34,17 @@ if (isset($_SESSION['username'])) {
 	</div>
 	<div id="wright" class="flex_col_center">
 		<svg id="small_back"><circle cx="90%" cy="90%" r="25%" fill="#E0FF22" /></svg>
-		<form id="in" class="login_form" method="GET" action="index.php">
+		<form id="in" class="login_form" method="GET" action="/">
 			<div class="message">SIGN IN</div>
 			<div id="loginform" class="wide">
 				<label>Email*</label>
 				<div class="flex_row_space_between input">
-					<input type="text" id="lun" class="input_type" name="an" autocomplete="off" minlength="5" maxlength="70" autofocus>
+					<input type="text" id="lun" class="input_type" name="email" autocomplete="off" minlength="5" maxlength="70" autofocus>
 					<div class="valid valid_1 tooltip"></div>
 				</div>
 				<label>Password*</label>
 				<div class="flex_row_space_between input">
-					<input type="password" id="lpw" class="input_type" name="pw" autocomplete="off" minlength="4" maxlength="50">
+					<input type="password" id="lpw" class="input_type" name="password" autocomplete="off" minlength="4" maxlength="50">
 					<div class="valid  valid_2 tooltip"></div>
 				</div>			
 			</div>
@@ -53,49 +54,49 @@ if (isset($_SESSION['username'])) {
 				<div class="asking" >forgot password?</div>
 			</div>
 		</form>
-		<form id="up" class="signup_form" method="POST" action="index.php">
+		<form id="up" class="signup_form" method="POST" action="/">
 			<div class="message">SIGN UP</div>
 			<div id="proc_a" class="wide">
 				<label>Username*</label>
 				<div class="flex_row_space_between input">
-					<input type="text" id="sun" class="input_type" name="identity" autocomplete="off"  maxlength="31">
+					<input type="text" id="sun" class="input_type" name="username" autocomplete="off"  maxlength="31">
 					<div class="valid valid_3 tooltip"></div>
 				</div>
 				<label>Email*</label>
 				<div class="flex_row_space_between input">
-					<input type="text" id="smail" class="input_type" name="enmail" autocomplete="off"  minlength="5" maxlength="70">
+					<input type="text" id="smail" class="input_type" name="email" autocomplete="off"  minlength="5" maxlength="70">
 					<div class="valid  valid_4 tooltip"></div>
 				</div>
 				<label>Password*</label>
 				<div class="flex_row_space_between input">
-					<input type="password" id="spw" class="input_type" name="enpw" autocomplete="off"  minlength="4" maxlength="50">
+					<input type="password" id="spw" class="input_type" name="password" autocomplete="off"  minlength="4" maxlength="50">
 					<div class="valid  valid_5 tooltip"></div>
 				</div>
 				<label>Confirm Password*</label>
 				<div class="flex_row_space_between input">
-					<input type="password" id="scpw" class="input_type" name="cfpw" autocomplete="off" minlength="4" maxlength="50">
+					<input type="password" id="scpw" class="input_type" name="c_password" autocomplete="off" minlength="4" maxlength="50">
 					<div class="valid valid_6 tooltip"></div>
 				</div>
 			</div>
 			<div id="proc_b" class="wide">
 				<label>First name*</label>
 				<div class="flex_row_space_between input">
-					<input type="text" id="fn" class="input_type" name="identity" autocomplete="off"  maxlength="31">
+					<input type="text" id="fn" class="input_type" name="first_name" autocomplete="off" minlength="1"  maxlength="47">
 					<div class="valid valid_7 tooltip"></div>
 				</div>					
 				<label">Last name*</label>
 				<div class="flex_row_space_between input">
-					<input type="text" id="ln" class="input_type" name="enmail" autocomplete="off"  minlength="5" maxlength="70">
+					<input type="text" id="ln" class="input_type" name="last_name" autocomplete="off"  minlength="1" maxlength="47">
 					<div class="valid  valid_8 tooltip"></div>
 				</div>					
-				<label>Date of birth *</label>
+				<label>Date of birth [mm-dd-yyyy]*</label>
 				<div class="flex_row_space_between input">
-					<input type="date" id="bd" class="input_type" name="enpw" autocomplete="off" required="required" min="01-01-1900" max="12-31-2019">
+					<input type="date" id="bd" class="input_type" name="date_of_birth" autocomplete="off" required="required" min="01-01-1900" max="12-31-2019">
 					<div class="valid  valid_9 tooltip"></div>
 				</div>
 				<label>Select country*</label>
 				<div class="flex_row_space_between input">
-					<select id="ct" class="input_type" name="cfpw">
+					<select id="ct" class="input_type" name="country">
 						<option value="all" selected='selected'>All</option>
 						<option value="au">Australia</option>
 						<option value="jp">Japan</option>
@@ -108,13 +109,19 @@ if (isset($_SESSION['username'])) {
 			</div>
 			<div class="flex_row_center">
 				<div id="nextbtn" class="google_sans blue_button" onclick='next()' style="width:40%; margin-right: 5px;">next</div>
-				<button id="upbtn" class="google_sans blue_button">submit</button>				
+				<button id="upbtn" name="signup" class="google_sans blue_button">submit</button>				
 			</div>
 			<div class="flex_row_space_between">
 				<div class="offer" style="cursor: pointer;" onclick="tab();">SIGN IN ACCOUNT</div>
 				<div class="offer"></div>
 			</div>
 		</form>
+		<div id="address" class="flex_row_center">
+			<div class="tab">About</div>
+			<div class="tab">API</div>
+			<div class="tab">For business</div>
+			<div><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : "none";?></div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript" src="js/welcome.js"></script>
