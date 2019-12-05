@@ -37,29 +37,32 @@ create	table clients (
 	primary key(id),
 	unique(email)
 );
-
-create table network (
-	id SERIAL,
-	user_id integer,
-	following_id integer,
-	primary key (id),
-	foreign key (user_id) references users(id)
-		on delete set null,
-	foreign key (following_id) references users(id)
-		on delete set null
-);	
 create table category (
 	id SERIAL,
-	name varchar (512) not null,
 	image varchar(256),
+	name varchar (512),
 	users_count integer,	
 	creator integer not null,
 	description varchar(960),	
 	created timestamp default current_timestamp,
-	primary key (id),
+	primary key (id, image, name),
 	foreign key (creator) references clients(id)
 		on delete set null
 );
+create table network (
+	id SERIAL,
+	user_id integer,
+	net_id integer,
+    net_image varchar (256),
+	net_name varchar (512),
+    rank integer,
+    score integer,
+	primary key (id),
+	foreign key (user_id) references users(id)
+		on delete set null,
+	foreign key (net_id, net_image, net_name) references category(id, image, name)
+		on delete set null
+);	
 create table sessions (
 	id SERIAL,
 	user_id integer,
@@ -81,7 +84,7 @@ create table blacklist (
 	ip varchar (15)	
 );
 
-
+/*
 drop table blacklist CASCADE;
 drop table tokens CASCADE;
 drop table sessions CASCADE;
@@ -89,3 +92,4 @@ drop table category CASCADE;
 drop table network CASCADE;
 drop table clients CASCADE;
 drop table users CASCADE;
+*/
