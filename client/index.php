@@ -4,7 +4,8 @@ $session_id = session_id();
 
 include('load.php');
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['client'])) {
+		//unset($_SESSION['client']);
 		header('location: main/');
 }
 ?>
@@ -12,7 +13,6 @@ if (isset($_SESSION['username'])) {
 <html>
 <head>
 	<title>DITGITID | <?php echo date('Y'); ?></title>
-	<script type="text/javascript" src="js/welcome.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/welcome.css">
 	<meta name="viewport" content="width=device-width" />
 	<meta name="theme-color" content="#ffffff" />
@@ -21,8 +21,13 @@ if (isset($_SESSION['username'])) {
 <div id="small_back"></div>
 <div id="content" class="flex_row_center">
 	<div id="wleft" class="flex_col_center">	
-		<div class="iconik"><svg viewBox="0 0 600 476" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path fill-rule="evenodd" clip-rule="evenodd" d="M600 293H0V475.867H600V293ZM122.941 402.081C124.388 396.96 125.111 391.644 125.111 386.133C125.111 380.623 124.388 375.334 122.941 370.269C121.549 365.148 119.545 360.389 116.929 355.991C114.313 351.538 111.195 347.502 107.577 343.884C103.959 340.21 99.9235 337.065 95.4703 334.449C91.0172 331.833 86.2301 329.829 81.109 328.438C76.0436 326.99 70.7555 326.267 65.2448 326.267H29.1744V446H65.2448C70.7555 446 76.0436 445.304 81.109 443.913C86.2301 442.465 91.0172 440.434 95.4703 437.817C99.9235 435.201 103.959 432.084 107.577 428.466C111.195 424.792 114.313 420.756 116.929 416.359C119.545 411.906 121.549 407.146 122.941 402.081ZM101.148 386.133C101.148 381.179 100.202 376.531 98.3092 372.189C96.4723 367.848 93.9117 364.062 90.6276 360.834C87.399 357.55 83.5861 354.961 79.1886 353.069C74.8468 351.176 70.1989 350.23 65.2448 350.23H53.3048V422.037H65.2448C70.1989 422.037 74.8468 421.118 79.1886 419.281C83.5861 417.389 87.399 414.828 90.6276 411.6C93.9117 408.315 96.4723 404.502 98.3092 400.161C100.202 395.763 101.148 391.087 101.148 386.133ZM163.313 446H139.349V326.267H163.313V446ZM260.545 444.831C267.392 442.271 273.599 438.625 279.165 433.893V386.634H256.037V420.701C253.476 421.981 250.776 422.983 247.938 423.707C245.099 424.43 242.176 424.792 239.17 424.792C233.938 424.792 229.012 423.79 224.392 421.786C219.827 419.782 215.819 417.055 212.368 413.604C208.917 410.152 206.189 406.117 204.186 401.497C202.182 396.876 201.18 391.922 201.18 386.634C201.18 381.402 202.182 376.503 204.186 371.939C206.189 367.319 208.917 363.311 212.368 359.916C215.819 356.464 219.827 353.737 224.392 351.733C229.012 349.729 233.938 348.727 239.17 348.727C244.403 348.727 249.385 349.785 254.116 351.9C258.848 353.959 263.023 356.826 266.641 360.5L279.165 339.626C273.599 334.895 267.392 331.276 260.545 328.771C253.699 326.211 246.574 324.931 239.17 324.931C233.493 324.931 228.01 325.682 222.722 327.185C217.489 328.632 212.591 330.692 208.026 333.364C203.462 336.036 199.287 339.264 195.502 343.049C191.717 346.779 188.488 350.954 185.816 355.574C183.145 360.138 181.057 365.037 179.554 370.269C178.107 375.501 177.383 380.957 177.383 386.634C177.383 392.312 178.107 397.795 179.554 403.083C181.057 408.371 183.145 413.325 185.816 417.945C188.488 422.51 191.717 426.685 195.502 430.47C199.287 434.199 203.462 437.428 208.026 440.155C212.591 442.827 217.489 444.887 222.722 446.334C228.01 447.837 233.493 448.588 239.17 448.588C246.574 448.588 253.699 447.336 260.545 444.831ZM319.871 446H295.908V326.267H319.871V446ZM366.839 446H390.719V350.23H426.623V326.267H330.853V350.23H366.839V446ZM461.567 446H437.604V326.267H461.567V446ZM575.917 402.081C577.364 396.96 578.088 391.644 578.088 386.133C578.088 380.623 577.364 375.334 575.917 370.269C574.525 365.148 572.521 360.389 569.905 355.991C567.289 351.538 564.172 347.502 560.554 343.884C556.935 340.21 552.9 337.065 548.447 334.449C543.994 331.833 539.206 329.829 534.085 328.438C529.02 326.99 523.732 326.267 518.221 326.267H482.151V446H518.221C523.732 446 529.02 445.304 534.085 443.913C539.206 442.465 543.994 440.434 548.447 437.817C552.9 435.201 556.935 432.084 560.554 428.466C564.172 424.792 567.289 420.756 569.905 416.359C572.521 411.906 574.525 407.146 575.917 402.081ZM554.124 386.133C554.124 381.179 553.178 376.531 551.286 372.189C549.449 367.848 546.888 364.062 543.604 360.834C540.375 357.55 536.562 354.961 532.165 353.069C527.823 351.176 523.175 350.23 518.221 350.23H506.281V422.037H518.221C523.175 422.037 527.823 421.118 532.165 419.281C536.562 417.389 540.375 414.828 543.604 411.6C546.888 408.315 549.449 404.502 551.286 400.161C553.178 395.763 554.124 391.087 554.124 386.133Z" fill="#2F2F2F"/>
+		<div class="iconik"><svg viewBox="0 0 600 567" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M600 283V567H0V283H600ZM144.419 547.539H154.893V529.258C155.68 529.715 156.492 530.159 157.33 530.591C158.193 531.022 159.057 531.416 159.92 531.771C160.809 532.102 161.697 532.368 162.586 532.571C163.5 532.774 164.414 532.876 165.328 532.876C168.197 532.876 170.889 532.381 173.402 531.391C175.941 530.4 178.15 528.979 180.029 527.125C181.934 525.246 183.432 522.974 184.523 520.308C185.615 517.616 186.161 514.595 186.161 511.243C186.161 508.019 185.615 505.086 184.523 502.445C183.432 499.779 181.934 497.507 180.029 495.628C178.15 493.749 175.941 492.302 173.402 491.286C170.889 490.245 168.197 489.725 165.328 489.725C164.008 489.725 162.7 489.89 161.405 490.22C160.11 490.55 158.854 491.007 157.635 491.591C156.441 492.149 155.286 492.822 154.169 493.609C153.052 494.396 152.023 495.234 151.084 496.123L146.933 491.21H144.419V547.539ZM228.932 532H231.445V491.286H228.932L224.895 496.123C223.93 495.209 222.889 494.358 221.771 493.571C220.68 492.784 219.524 492.099 218.306 491.515C217.087 490.931 215.83 490.474 214.535 490.144C213.24 489.813 211.933 489.648 210.612 489.648C207.743 489.648 205.039 490.182 202.5 491.248C199.986 492.289 197.777 493.762 195.873 495.666C193.994 497.57 192.509 499.855 191.417 502.521C190.325 505.162 189.779 508.069 189.779 511.243C189.779 514.646 190.325 517.68 191.417 520.346C192.509 523.012 193.994 525.271 195.873 527.125C197.777 528.953 199.986 530.35 202.5 531.314C205.039 532.279 207.743 532.762 210.612 532.762C211.933 532.762 213.228 532.597 214.497 532.267C215.792 531.937 217.049 531.492 218.268 530.934C219.486 530.35 220.642 529.677 221.733 528.915C222.851 528.128 223.904 527.29 224.895 526.401L228.932 532ZM239.405 532H249.803V509.529C249.803 508.438 250.006 507.409 250.412 506.444C250.818 505.479 251.377 504.642 252.088 503.931C252.799 503.22 253.637 502.661 254.602 502.255C255.566 501.849 256.595 501.646 257.687 501.646H266.865V491.286H257.687C255.401 491.286 253.192 491.705 251.06 492.543C248.927 493.355 247.022 494.523 245.347 496.047L241.919 491.21H239.405V532ZM285.07 530.591C287.279 531.53 289.641 532 292.154 532H300.038V521.641H292.154C291.062 521.641 290.034 521.438 289.069 521.031C288.104 520.6 287.267 520.028 286.556 519.317C285.845 518.606 285.286 517.781 284.88 516.842C284.474 515.877 284.271 514.849 284.271 513.757V501.646H300.038V491.286H284.271V474.985H273.911V491.286H268.846V501.646H273.911V513.757C273.911 516.271 274.381 518.632 275.32 520.841C276.285 523.05 277.593 524.992 279.243 526.668C280.919 528.318 282.861 529.626 285.07 530.591ZM305.903 532H316.301V508.691C316.301 507.625 316.504 506.622 316.91 505.683C317.316 504.718 317.875 503.88 318.586 503.169C319.297 502.458 320.135 501.899 321.1 501.493C322.064 501.087 323.093 500.884 324.185 500.884C325.251 500.884 326.254 501.087 327.193 501.493C328.133 501.899 328.958 502.458 329.669 503.169C330.38 503.88 330.938 504.718 331.345 505.683C331.751 506.622 331.954 507.625 331.954 508.691V532H342.352V508.691C342.352 506.178 341.869 503.816 340.904 501.607C339.965 499.373 338.67 497.431 337.02 495.78C335.369 494.104 333.439 492.797 331.23 491.857C329.021 490.893 326.673 490.41 324.185 490.41C321.874 490.41 319.652 490.829 317.52 491.667C315.412 492.479 313.521 493.647 311.845 495.171L308.417 491.21H305.903V532ZM367.222 522.288C366.815 522.237 366.409 522.148 366.003 522.021L385.503 498.522C384.538 497.151 383.421 495.92 382.151 494.828C380.882 493.711 379.511 492.771 378.038 492.01C376.591 491.248 375.055 490.664 373.43 490.258C371.805 489.852 370.142 489.648 368.44 489.648C365.571 489.648 362.867 490.169 360.328 491.21C357.814 492.251 355.605 493.711 353.701 495.59C351.822 497.469 350.337 499.741 349.245 502.407C348.153 505.073 347.607 508.019 347.607 511.243C347.607 514.392 348.153 517.286 349.245 519.927C350.337 522.542 351.822 524.802 353.701 526.706C355.605 528.61 357.814 530.096 360.328 531.162C362.867 532.229 365.571 532.762 368.44 532.762C370.142 532.762 371.792 532.559 373.392 532.152C375.017 531.771 376.553 531.2 378 530.438C379.473 529.677 380.831 528.75 382.075 527.658C383.345 526.566 384.462 525.335 385.427 523.964L377.81 516.309C377.403 517.223 376.87 518.061 376.21 518.822C375.575 519.559 374.839 520.193 374.001 520.727C373.188 521.234 372.312 521.628 371.373 521.907C370.434 522.187 369.456 522.326 368.44 522.326C368.034 522.326 367.628 522.313 367.222 522.288ZM390.759 532H401.156V509.529C401.156 508.438 401.359 507.409 401.766 506.444C402.172 505.479 402.73 504.642 403.441 503.931C404.152 503.22 404.99 502.661 405.955 502.255C406.92 501.849 407.948 501.646 409.04 501.646H418.219V491.286H409.04C406.755 491.286 404.546 491.705 402.413 492.543C400.28 493.355 398.376 494.523 396.7 496.047L393.272 491.21H390.759V532ZM421.228 532H444.993C446.771 532 448.446 531.67 450.021 531.01C451.595 530.324 452.966 529.397 454.134 528.229C455.302 527.036 456.229 525.665 456.914 524.116C457.6 522.542 457.942 520.854 457.942 519.051C457.942 517.273 457.6 515.636 456.914 514.138C456.229 512.64 455.302 511.357 454.134 510.291C452.966 509.225 451.595 508.399 450.021 507.815C448.446 507.206 446.771 506.901 444.993 506.901H434.177C433.466 506.901 432.856 506.647 432.349 506.14C431.841 505.606 431.587 504.972 431.587 504.235C431.587 503.524 431.841 502.915 432.349 502.407C432.856 501.899 433.466 501.646 434.177 501.646H455.238V491.286H434.177C432.374 491.286 430.686 491.629 429.111 492.314C427.537 492.975 426.166 493.889 424.998 495.057C423.83 496.225 422.903 497.596 422.218 499.17C421.558 500.744 421.228 502.433 421.228 504.235C421.228 506.038 421.558 507.727 422.218 509.301C422.903 510.875 423.83 512.259 424.998 513.452C426.166 514.62 427.537 515.547 429.111 516.232C430.686 516.918 432.374 517.261 434.177 517.261H444.993C445.704 517.261 446.313 517.375 446.821 517.604C447.329 517.832 447.583 518.314 447.583 519.051C447.583 519.762 447.329 520.371 446.821 520.879C446.313 521.387 445.704 521.641 444.993 521.641H421.228V532ZM122.941 392.081C124.388 386.96 125.111 381.644 125.111 376.133C125.111 370.623 124.388 365.334 122.941 360.269C121.549 355.148 119.545 350.389 116.929 345.991C114.313 341.538 111.195 337.502 107.577 333.884C103.959 330.21 99.9235 327.065 95.4703 324.449C91.0172 321.833 86.2301 319.829 81.109 318.438C76.0436 316.99 70.7555 316.267 65.2448 316.267H29.1744V436H65.2448C70.7555 436 76.0436 435.304 81.109 433.913C86.2301 432.465 91.0172 430.434 95.4703 427.817C99.9235 425.201 103.959 422.084 107.577 418.466C111.195 414.792 114.313 410.756 116.929 406.359C119.545 401.906 121.549 397.146 122.941 392.081ZM139.349 436H163.313V316.267H139.349V436ZM260.545 434.831C267.392 432.271 273.599 428.625 279.165 423.893V376.634H256.037V410.701C253.476 411.981 250.776 412.983 247.938 413.707C245.099 414.43 242.176 414.792 239.17 414.792C233.938 414.792 229.012 413.79 224.392 411.786C219.827 409.782 215.819 407.055 212.368 403.604C208.917 400.152 206.189 396.117 204.186 391.497C202.182 386.876 201.18 381.922 201.18 376.634C201.18 371.402 202.182 366.503 204.186 361.939C206.189 357.319 208.917 353.311 212.368 349.916C215.819 346.464 219.827 343.737 224.392 341.733C229.012 339.729 233.938 338.727 239.17 338.727C244.403 338.727 249.385 339.785 254.116 341.9C258.848 343.959 263.023 346.826 266.641 350.5L279.165 329.626C273.599 324.895 267.392 321.276 260.545 318.771C253.699 316.211 246.574 314.931 239.17 314.931C233.493 314.931 228.01 315.682 222.722 317.185C217.489 318.632 212.591 320.692 208.026 323.364C203.462 326.036 199.287 329.264 195.502 333.049C191.717 336.779 188.488 340.954 185.816 345.574C183.145 350.138 181.057 355.037 179.554 360.269C178.107 365.501 177.383 370.957 177.383 376.634C177.383 382.312 178.107 387.795 179.554 393.083C181.057 398.371 183.145 403.325 185.816 407.945C188.488 412.51 191.717 416.685 195.502 420.47C199.287 424.199 203.462 427.428 208.026 430.155C212.591 432.827 217.489 434.887 222.722 436.334C228.01 437.837 233.493 438.588 239.17 438.588C246.574 438.588 253.699 437.336 260.545 434.831ZM295.908 436H319.871V316.267H295.908V436ZM366.839 436H390.719V340.23H426.623V316.267H330.853V340.23H366.839V436ZM437.604 436H461.567V316.267H437.604V436ZM575.917 392.081C577.364 386.96 578.088 381.644 578.088 376.133C578.088 370.623 577.364 365.334 575.917 360.269C574.525 355.148 572.521 350.389 569.905 345.991C567.289 341.538 564.172 337.502 560.554 333.884C556.935 330.21 552.9 327.065 548.447 324.449C543.994 321.833 539.206 319.829 534.085 318.438C529.02 316.99 523.732 316.267 518.221 316.267H482.151V436H518.221C523.732 436 529.02 435.304 534.085 433.913C539.206 432.465 543.994 430.434 548.447 427.817C552.9 425.201 556.935 422.084 560.554 418.466C564.172 414.792 567.289 410.756 569.905 406.359C572.521 401.906 574.525 397.146 575.917 392.081Z" fill="#2F2F2F"/>
+			<path d="M101.148 376.133C101.148 371.179 100.202 366.531 98.3092 362.189C96.4723 357.848 93.9117 354.062 90.6276 350.834C87.399 347.55 83.5861 344.961 79.1886 343.069C74.8468 341.176 70.1989 340.23 65.2448 340.23H53.3048V412.037H65.2448C70.1989 412.037 74.8468 411.118 79.1886 409.281C83.5861 407.389 87.399 404.828 90.6276 401.6C93.9117 398.315 96.4723 394.502 98.3092 390.161C100.202 385.763 101.148 381.087 101.148 376.133Z" fill="#2F2F2F"/>
+			<path d="M554.124 376.133C554.124 371.179 553.178 366.531 551.286 362.189C549.449 357.848 546.888 354.062 543.604 350.834C540.375 347.55 536.562 344.961 532.165 343.069C527.823 341.176 523.175 340.23 518.221 340.23H506.281V412.037H518.221C523.175 412.037 527.823 411.118 532.165 409.281C536.562 407.389 540.375 404.828 543.604 401.6C546.888 398.315 549.449 394.502 551.286 390.161C553.178 385.763 554.124 381.087 554.124 376.133Z" fill="#2F2F2F"/>
+			<path d="M175.726 511.243C175.726 509.517 175.446 507.968 174.888 506.597C174.354 505.226 173.618 504.07 172.679 503.131C171.739 502.166 170.635 501.43 169.365 500.922C168.096 500.414 166.75 500.16 165.328 500.16C163.906 500.16 162.561 500.414 161.291 500.922C160.047 501.43 158.955 502.166 158.016 503.131C157.076 504.07 156.327 505.226 155.769 506.597C155.235 507.968 154.969 509.517 154.969 511.243C154.969 512.894 155.235 514.404 155.769 515.775C156.327 517.146 157.076 518.314 158.016 519.279C158.955 520.244 160.047 520.993 161.291 521.526C162.561 522.06 163.906 522.326 165.328 522.326C166.75 522.326 168.096 522.06 169.365 521.526C170.635 520.993 171.739 520.244 172.679 519.279C173.618 518.314 174.354 517.146 174.888 515.775C175.446 514.404 175.726 512.894 175.726 511.243Z" fill="#2F2F2F"/>
+			<path d="M220.972 511.243C220.972 509.821 220.692 508.45 220.134 507.13C219.601 505.784 218.864 504.604 217.925 503.588C216.985 502.547 215.881 501.722 214.611 501.112C213.367 500.478 212.034 500.16 210.612 500.16C209.19 500.16 207.845 500.401 206.575 500.884C205.331 501.366 204.239 502.077 203.3 503.017C202.386 503.956 201.662 505.124 201.129 506.521C200.596 507.892 200.329 509.466 200.329 511.243C200.329 513.021 200.596 514.607 201.129 516.004C201.662 517.375 202.386 518.53 203.3 519.47C204.239 520.409 205.331 521.12 206.575 521.603C207.845 522.085 209.19 522.326 210.612 522.326C212.034 522.326 213.367 522.021 214.611 521.412C215.881 520.777 216.985 519.952 217.925 518.937C218.864 517.896 219.601 516.715 220.134 515.395C220.692 514.049 220.972 512.665 220.972 511.243Z" fill="#2F2F2F"/>
+			<path d="M371.335 500.579C370.853 500.401 370.37 500.287 369.888 500.236C369.431 500.186 368.948 500.16 368.44 500.16C367.019 500.16 365.673 500.427 364.403 500.96C363.159 501.468 362.067 502.204 361.128 503.169C360.214 504.134 359.49 505.302 358.957 506.673C358.424 508.019 358.157 509.542 358.157 511.243C358.157 511.624 358.17 512.056 358.195 512.538C358.246 513.021 358.31 513.516 358.386 514.023C358.487 514.506 358.602 514.976 358.729 515.433C358.855 515.89 359.021 516.296 359.224 516.651L371.335 500.579Z" fill="#2F2F2F"/>
 			<path d="M600 134.843C600 147.255 598.459 159.229 595.378 170.763C592.416 182.173 588.15 192.892 582.58 202.923C577.011 212.827 570.375 221.917 562.672 230.192C554.97 238.342 546.378 245.363 536.898 251.255C527.418 257.148 517.227 261.724 506.325 264.984C495.542 268.119 484.284 269.686 472.552 269.686H395.764V0H472.552C484.284 0 495.542 1.6299 506.325 4.8897C517.227 8.02412 527.418 12.5377 536.898 18.4304C546.378 24.3231 554.97 31.4069 562.672 39.6818C570.375 47.8313 577.011 56.9211 582.58 66.9513C588.15 76.8561 592.416 87.5758 595.378 99.1105C598.459 110.52 600 122.431 600 134.843ZM548.985 134.843C548.985 123.684 546.971 113.215 542.942 103.436C539.031 93.6566 533.58 85.1309 526.589 77.8591C519.716 70.4618 511.598 64.6318 502.237 60.369C492.994 56.1062 483.099 53.9748 472.552 53.9748H447.134V215.711H472.552C483.099 215.711 492.994 213.642 502.237 209.505C511.598 205.242 519.716 199.475 526.589 192.203C533.58 184.806 539.031 176.217 542.942 166.438C546.971 156.533 548.985 146.001 548.985 134.843Z" fill="#2F2F2F"/>
 			<path d="M0 134.918C0 122.506 1.54796 110.532 4.64388 98.9976C7.62072 87.5883 11.9074 76.8686 17.5039 66.8384C23.1003 56.9337 29.7685 47.8438 37.5083 39.569C45.248 31.4195 53.8809 24.3984 63.4068 18.5056C72.9327 12.6129 83.1731 8.03666 94.1278 4.77686C104.964 1.64244 116.276 0.0752262 128.064 0.0752262H205.224V269.761H128.064C116.276 269.761 104.964 268.131 94.1278 264.871C83.1731 261.737 72.9327 257.223 63.4068 251.331C53.8809 245.438 45.248 238.354 37.5083 230.079C29.7685 221.93 23.1003 212.84 17.5039 202.81C11.9074 192.905 7.62072 182.185 4.64388 170.651C1.54796 159.241 0 147.33 0 134.918ZM51.2613 134.918C51.2613 146.077 53.2855 156.546 57.334 166.325C61.2635 176.104 66.7409 184.63 73.7662 191.902C80.6725 199.299 88.8291 205.129 98.2359 209.392C107.524 213.655 117.466 215.786 128.064 215.786H153.605V54.05H128.064C117.466 54.05 107.524 56.1187 98.2359 60.2562C88.8291 64.519 80.6725 70.2863 73.7662 77.5582C66.7409 84.9554 61.2635 93.5437 57.334 103.323C53.2855 113.228 51.2613 123.76 51.2613 134.918Z" fill="#2F2F2F"/>
 			<path d="M312.077 0.0752262H366.394V269.686H312.077V0.0752262Z" fill="#2F2F2F"/>
@@ -30,7 +35,7 @@ if (isset($_SESSION['username'])) {
 			</svg>
 		</div>
 		<div class="copyright">&copy; DIGITID <?php echo date('Y'); ?> | KU License</div>
-		<svg id="big_back"><circle cx="20%" cy="80%" r="50%" fill="#90E7ED" /></svg>
+		<svg id="big_back"><circle cx="40%" cy="80%" r="56%" fill="#90E7ED" /></svg>
 	</div>
 	<div id="wright" class="flex_col_center">
 		<svg id="small_back"><circle cx="90%" cy="90%" r="25%" fill="#E0FF22" /></svg>
@@ -39,16 +44,16 @@ if (isset($_SESSION['username'])) {
 			<div id="loginform" class="wide">
 				<label>Email*</label>
 				<div class="flex_row_space_between input">
-					<input type="text" id="lun" class="input_type" name="an" autocomplete="off" minlength="5" maxlength="70" autofocus>
+					<input type="text" id="lun" class="input_type" name="email" autocomplete="off" minlength="5" maxlength="70" autofocus>
 					<div class="valid valid_1 tooltip"></div>
 				</div>
 				<label>Password*</label>
 				<div class="flex_row_space_between input">
-					<input type="password" id="lpw" class="input_type" name="pw" autocomplete="off" minlength="4" maxlength="50">
+					<input type="password" id="lpw" class="input_type" name="password" autocomplete="off" minlength="4" maxlength="50">
 					<div class="valid  valid_2 tooltip"></div>
 				</div>			
 			</div>
-			<button id="logbtn" name="signin" class="google_sans blue_button" style="border: none; font-size: 15px;" data-callback='inSubmit'>contnue</button>
+			<button id="logbtn" name="signin" class="google_sans blue_button">continue</button>
 			<div class="flex_row_space_between">
 				<div class="offer" style="cursor: pointer;" onclick="tab();">CREATE ACCOUNT</div>
 				<div class="asking" >forgot password?</div>
@@ -56,228 +61,73 @@ if (isset($_SESSION['username'])) {
 		</form>
 		<form id="up" class="signup_form" method="POST" action="/">
 			<div class="message">SIGN UP</div>
-			<div class="wide">
-				<label>Username*</label>
+			<div id="proc_a" class="wide">
+				<label>Company name*</label>
 				<div class="flex_row_space_between input">
-					<input type="text" id="sun" class="input_type" name="identity" autocomplete="off"  maxlength="31">
+					<input type="text" id="sun" class="input_type" name="username" autocomplete="off"  maxlength="31">
 					<div class="valid valid_3 tooltip"></div>
 				</div>
 				<label>Email*</label>
 				<div class="flex_row_space_between input">
-					<input type="text" id="smail" class="input_type" name="enmail" autocomplete="off"  minlength="5" maxlength="70">
+					<input type="text" id="smail" class="input_type" name="email" autocomplete="off"  minlength="5" maxlength="70">
 					<div class="valid  valid_4 tooltip"></div>
 				</div>
 				<label>Password*</label>
 				<div class="flex_row_space_between input">
-					<input type="password" id="spw" class="input_type" name="enpw" autocomplete="off"  minlength="4" maxlength="50">
+					<input type="password" id="spw" class="input_type" name="password" autocomplete="off"  minlength="4" maxlength="50">
 					<div class="valid  valid_5 tooltip"></div>
 				</div>
 				<label>Confirm Password*</label>
 				<div class="flex_row_space_between input">
-					<input type="password" id="scpw" class="input_type" name="cfpw" autocomplete="off" minlength="4" maxlength="50">
+					<input type="password" id="scpw" class="input_type" name="c_password" autocomplete="off" minlength="4" maxlength="50">
 					<div class="valid valid_6 tooltip"></div>
 				</div>
 			</div>
-			<button id="upbtn" class="google_sans blue_button" name="signup">sign up</button>
+			<div id="proc_b" class="wide">
+				<label>First name*</label>
+				<div class="flex_row_space_between input">
+					<input type="text" id="fn" class="input_type" name="first_name" autocomplete="off" minlength="1"  maxlength="47">
+					<div class="valid valid_7 tooltip"></div>
+				</div>					
+				<label">Last name*</label>
+				<div class="flex_row_space_between input">
+					<input type="text" id="ln" class="input_type" name="last_name" autocomplete="off"  minlength="1" maxlength="47">
+					<div class="valid  valid_8 tooltip"></div>
+				</div>					
+				<label>Date of birth [mm-dd-yyyy]*</label>
+				<div class="flex_row_space_between input">
+					<input type="date" id="bd" class="input_type" name="date_of_birth" autocomplete="off" required="required" min="01-01-1900" max="12-31-2019">
+					<div class="valid  valid_9 tooltip"></div>
+				</div>
+				<label>Select country*</label>
+				<div class="flex_row_space_between input">
+					<select id="ct" class="input_type" name="country">
+						<option value="all" selected='selected'>All</option>
+						<option value="au">Australia</option>
+						<option value="jp">Japan</option>
+						<option value="kr">Korea</option>
+						<option value="uk">UK</option>
+						<option value="usa">USA</option>
+					</select>
+					<div class="valid valid_10 tooltip"></div>
+				</div>				
+			</div>
+			<div class="flex_row_center">
+				<div id="nextbtn" class="google_sans blue_button" onclick='next()' style="width:40%; margin-right: 5px;">next</div>
+				<button id="upbtn" name="signup" class="google_sans blue_button">submit</button>				
+			</div>
 			<div class="flex_row_space_between">
 				<div class="offer" style="cursor: pointer;" onclick="tab();">SIGN IN ACCOUNT</div>
 				<div class="offer"></div>
 			</div>
 		</form>
+		<div id="address" class="flex_row_center">
+			<div class="tab">About</div>
+			<div class="tab">API</div>
+			<div class="tab">For business</div>
+		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	let login_valid = {'email':false, 'password':false};
-	let login_message = {
-		'isEmailEmpty':'Email is required!', 
-		'isEmailValid':'Email must be valid!',
-		'isPassEmpty':'Password is required!', 
-		'isPassValid':'Password string should avoid (+ = - / ? > < . , * ~ ` )'
-	};
-	let sign_valid = {'username':false, 'email':false, 'password_a':false, 'password_b':false};
-	let signup_message = {
-		'isUsernameEmpty' : 'Username is required!',
-		'isUsernameValid' : 'Username must be valid [a-zA-Z0-9_]',
-		'isEmailEmpty':'Email is required!', 
-		'isEmailValid':'Email must be valid!',
-		'isPassEmpty':'Password is required!', 
-		'isPassValid':'Password string should avoid (+ = - / ? > < . , * ~ ` )',
-		'isCPassEmpty':'Confirm password is required!', 
-		'isCPassValid':'Confirm password!'
-	};
-	
-	function _(e) {
-		return document.getElementById(e);
-	}
-	function $(c, n) {
-		return document.getElementsByClassName(c)[n];
-	}	
-	function mailchar(email) {
-		var filter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
-		return (filter.test(email));
-	}
-	function passchar(pass) {
-		var filter = /^([a-zA-Z0-9_%@!?]*)+$/;
-		return filter.test(pass);
-	}
-	function namechar(name) {
-		var filter = /^([a-zA-Z0-9_.]*)$/;
-		return filter.test(name);
-	}
-	function disabledBTN(id, bool) {
-		if(bool){
-			_(id).style.backgroundColor= 'rgba(61, 165, 255, 1)';
-			_(id).style.cursor = 'default';
-			_(id).disabled = false;
-		}else {
-			_(id).style.backgroundColor= '#555';
-			_(id).style.cursor = 'pointer';
-			_(id).disabled = true;			
-		}
-	}
-	function CallBack(id) { 
-		if(!(login_valid['email'] && login_valid['password'])) {
-			disabledBTN(id, false);
-		} else {
-			disabledBTN(id, true);	
-		}
-	}
-	function CallBackUp(id) { 
-		if(sign_valid['username'] == true && sign_valid['email'] == true && sign_valid['password_a'] == true && sign_valid['password_b'] == true) {
-			disabledBTN(id, true);	
-		} else {
-			disabledBTN(id, false);
-		}
-	}
-	window.onload = function() {
-		disabledBTN('logbtn', false);	
-		disabledBTN('upbtn', false);		
-	}
-	_('logbtn').addEventListener('mouseover', CallBack('logbtn'), true);
-	_('upbtn').addEventListener('mouseover', CallBackUp('upbtn'), true);
-	/// Login in form 
-	_('lun').addEventListener('blur', 
-		function (){
-			if (!this.value > 0) {
-				$('valid valid_1 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_1 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+login_message['isEmailEmpty']+"</span>";
-				login_valid['email'] = false;
-			}else if (!mailchar(this.value)){
-				$('valid valid_1 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_1 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+login_message['isEmailValid']+"</span>";				
-				login_valid['email'] = false;
-			}else {
-				$('valid valid_1 tooltip', 0).style.color = "#00ff00";
-				$('valid valid_1 tooltip', 0).innerHTML = '☑';
-				login_valid['email'] = true;
-			}
-			CallBack('logbtn');
-		},  true);
-	_('lpw').addEventListener('keyup', 
-		function (){
-			if (!this.value > 0) {
-				$('valid valid_2 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_2 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+login_message['isPassEmpty']+"</span>";
-				login_valid['password'] = false;
-			}else if (!passchar(this.value)){
-				$('valid valid_2 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_2 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+login_message['isPassValid']+"</span>";				
-				login_valid['password'] = false;
-			}else {
-				$('valid valid_2 tooltip', 0).style.color = "#00ff00";
-				$('valid valid_2 tooltip', 0).innerHTML = '☑';
-				login_valid['password'] = true;
-			}
-			CallBack('logbtn');
-		},  true);
-	_('lpw').addEventListener('blur', 
-		function (){
-			if (!this.value > 0) {
-				$('valid valid_2 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_2 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+login_message['isPassEmpty']+"</span>";
-				login_valid['password'] = false;
-			}else if (!passchar(this.value)){
-				$('valid valid_2 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_2 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+login_message['isPassValid']+"</span>";				
-				login_valid['password'] = false;
-			}else {
-				$('valid valid_2 tooltip', 0).style.color = "#00ff00";
-				$('valid valid_2 tooltip', 0).innerHTML = '☑';
-				login_valid['password'] = true;
-			}
-			CallBack('logbtn');
-		},  true);
-
-	/// Signuo form
-	_('sun').addEventListener('blur', 
-		function (){
-			if (!this.value > 0) {
-				$('valid valid_3 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_3 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+signup_message['isUsernameEmpty']+"</span>";
-				sign_valid['username'] = false;
-			}else if (!namechar(this.value)){
-				$('valid valid_3 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_3 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+signup_message['isUsernameValid']+"</span>";				
-				sign_valid['username'] = false;
-			}else {
-				$('valid valid_3 tooltip', 0).style.color = "#00ff00";
-				$('valid valid_3 tooltip', 0).innerHTML = '☑';
-				sign_valid['username'] = true;
-			}
-			CallBackUp('upbtn');
-		}, true);
-	_('smail').addEventListener('blur', 
-		function (){
-			if (!this.value > 0) {
-				$('valid valid_4 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_4 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+signup_message['isEmailEmpty']+"</span>";
-				sign_valid['email'] = false;
-			}else if (!mailchar(this.value)){
-				$('valid valid_4 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_4 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+signup_message['isEmailValid']+"</span>";				
-				sign_valid['email'] = false;
-			}else {
-				$('valid valid_4 tooltip', 0).style.color = "#00ff00";
-				$('valid valid_4 tooltip', 0).innerHTML = '☑';
-				sign_valid['email'] = true;
-			}
-			CallBackUp('upbtn');
-		},  true);
-	_('spw').addEventListener('blur', 
-		function (){
-			if (!this.value > 0) {
-				$('valid valid_5 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_5 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+signup_message['isPassEmpty']+"</span>";
-				sign_valid['password_a'] = false;
-			}else if (!passchar(this.value)){
-				$('valid valid_5 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_5 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+signup_message['isPassValid']+"</span>";				
-				sign_valid['password_a'] = false;
-			}else {
-				$('valid valid_5 tooltip', 0).style.color = "#00ff00";
-				$('valid valid_5 tooltip', 0).innerHTML = '☑';
-				sign_valid['password_a'] = true;
-			}
-			CallBackUp('upbtn');
-		},  true);
-	_('scpw').addEventListener('keyup', 
-		function (){
-			if (!this.value > 0) {
-				$('valid valid_6 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_6 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+signup_message['isCPassEmpty']+"</span>";
-				sign_valid['password_b'] = false;
-			}else if (_('scpw').value !== _('spw').value) {
-				$('valid valid_6 tooltip', 0).style.color = "#ff0000";
-				$('valid valid_6 tooltip', 0).innerHTML = "!<span class='tooltiptext'>"+signup_message['isCPassValid']+"</span>";
-				sign_valid['password_b'] = false;
-			}else {
-				sign_valid['password_b'] = true;
-				$('valid valid_6 tooltip', 0).style.color = "#00ff00";
-				$('valid valid_6 tooltip', 0).innerHTML = '☑';
-				CallBackUp('upbtn');
-			}
-		},  true);
-		
-</script>
+<script type="text/javascript" src="js/welcome.js"></script>
 </body>
 </html>

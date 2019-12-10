@@ -1,19 +1,19 @@
 <?php 
 session_start();
-if (!isset($_SESSION['username'])) {
+include('inner.php');
+if (!isset($_SESSION['client'])) {
 		header('location: /');
 }
 if (isset($_GET['logout'])) {
 	session_destroy();
-	unset($_SESSION['username']);
+	unset($_SESSION['client']);
 }
 
-include('inner.php');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DIGITID <?php echo date('Y')." | ".$cry->dec($profile['username']); ?></title>
+	<title>DIGITID <?php echo date('Y')." | ".$cry->dec($profile['company_name']); ?></title>
 	<link rel="stylesheet" type="text/css" href="css/diid.css">
 	<meta name="viewport" content="width=device-width" />
 	<meta name="theme-color" content="#ffffff" />
@@ -25,7 +25,7 @@ include('inner.php');
 			<img class="user_image" src="<?php echo $profile['profile_picture']; ?>">
 			<div class="flex_row_center">
 				<div class="di_stat">
-					<div class="di_username"><?php echo $cry->dec($profile['username']);?></div>
+					<div class="di_username"><?php echo $cry->dec($profile['company_name']);?></div>
 					<div id="di_name" class="flex_row_center"><div><?php echo $cry->dec($profile['first_name']);?></div><div><?php echo $cry->dec($profile['last_name']);?></div></div>
 				</div>
 			</div>
@@ -52,7 +52,7 @@ include('inner.php');
 					<input type="submit" tabindex="2" value="S" class="search_button icon_font">
 				</form>	
 			</div>
-			<div class="di_items flex_row">
+			<!-- <div class="di_items flex_row">
 				<div class="flex_row" style="z-index: 8;">
 					<img class="di_items_logo" src="/assets/ApexS3.jpg">
 				</div>
@@ -66,10 +66,10 @@ include('inner.php');
 				<div class="flex_row" style="z-index: 8;">
 					<img class="di_items_logo" src="/assets/ApexS1.jpg">
 				</div>
-			</div>
+			</div> -->
 
 		</div>
-		<div id="copyright">&copy; 2019 DIGITID</div>
+		<div id="copyright">&copy; 2019 DIGITID <?php echo isset($_SESSION['client']) ? $_SESSION['client'] : "none";?></div>
 	</div>
 </div>
 <script type="text/javascript">

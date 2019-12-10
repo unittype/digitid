@@ -53,10 +53,10 @@ $cry = new AES();
 
 $blacklist = array();
 
-$user = $cry->enc($_SESSION['username']);
+$user = $cry->enc($_SESSION['client']);
 
 $db = $conn->getConnection();
-$sql = "select * from users where username = '$user'";
+$sql = "select * from clients where company_name = '$user'";
 $re = pg_query($db, $sql);
 foreach ($row as $key => $value) {
   array_push($blacklist[$key] = $value);

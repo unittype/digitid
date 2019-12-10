@@ -120,7 +120,6 @@ if (isset($_SESSION['username'])) {
 			<div class="tab">About</div>
 			<div class="tab">API</div>
 			<div class="tab">For business</div>
-			<div><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : "none";?></div>
 		</div>
 	</div>
 </div>
