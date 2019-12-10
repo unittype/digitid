@@ -64,7 +64,7 @@ $errors = array(
 // definition of DB connection
 define('DB_HOST', 'localhost');
 define('DB_PORT', '5432');
-define('DB_PASSWD', '9891');
+define('DB_PASSWD', '----');
 define('DB_USER', 'postgres');
 define('DB_NAME', 'digitid');
 try {

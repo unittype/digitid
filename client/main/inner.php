@@ -5,7 +5,7 @@
 class DB {
 	private $host = 'localhost';
 	private $port = '5432';
-	private $password = '9891';
+	private $password = '----';
 	private $user = 'postgres';
 	private $dbname = 'digitid';
 	public $connection = null;
