@@ -10,19 +10,13 @@ if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 }else {
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 }
-$ip_addr = clean($ip_address);
+$ip_addr = $class->clean($ip_address);
 if(isset($_SESSION['banned']) && !empty($_SESSION['banned'])) {
 	header('location : '.GUI.'/ban');
 }
-if ($_SESSION['banned'] == 'banned_user') {
-		header('location: '.GUI.'/ban');
+if (isset($_SESSION['banned']) && $_SESSION['banned'] == 'banned_user') {
+	header('location: '.GUI.'/ban');
 }
-// definition of DB connection
-define('DB_HOST', 'localhost');
-define('DB_PORT', '5432');
-define('DB_PASSWD', '----');
-define('DB_USER', 'postgres');
-define('DB_NAME', 'digitid');
 
 // error array list
 $errors = array(
@@ -67,23 +61,15 @@ $errors = array(
 		]
 	); 
 
-try {
-	$db = pg_connect('host='.DB_HOST.' port='.DB_PORT.' password='.DB_PASSWD.' user='.DB_USER.' dbname='.DB_NAME.'');
-	if (!$db) {
-		$errors['db_conn'] = 'DB refucing connection';
-	}else{
-		$errors['db_conn'] = 0;		
-	}
-} catch (Exception $e) {
-	$errors['db_conn'] = 'Caught exception: '.$e->getMessage();
-}
 
 $sql = 'select ip from blacklist';
 $blacklist = array();
 $getIp = pg_query($db, $sql);
-$row = pg_fetch_all($getIp);
-foreach ($row as $key => $value) {
-  array_push($blacklist, $value['ip']);
+if (pg_num_rows($getIp) > 0) {
+	$row = pg_fetch_all($getIp);
+	foreach ($row as $key => $value['ip']) {
+	  array_push($blacklist, $value['ip']);
+	}
 }
 
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -100,39 +86,16 @@ if(in_array($ip_address, $blacklist)) {
     header('location: '.GUI.'/ban');
 }
 
-function clean($string) {
-$string = trim($string);
-$string = stripslashes($string);
-$string = htmlspecialchars($string);
-return $string;
-}
-function enc($string){
-  $encrypt_method = 'AES-256-CBC';
-  $secret_key = 'U2FsdGVkX1+kUKGvV1ZWDEgvixMXVv0XKCnbpN16gDA=';
-  $secret_iv = hash('sha256', $secret_key);
-  $key = hash('sha256', $secret_iv);
-  $initialization_vector = substr(hash('sha256', $secret_iv), 0, 16);
-  $a = openssl_encrypt($string, $encrypt_method, $key, 0, $initialization_vector);
-  return base64_encode($a);     
- }
-function dec($string) {
-  $encrypt_method = 'AES-256-CBC';
-  $secret_key = 'U2FsdGVkX1+kUKGvV1ZWDEgvixMXVv0XKCnbpN16gDA=';
-  $secret_iv = hash('sha256', $secret_key);
-  $key = hash('sha256', $secret_iv);
-  $initialization_vector = substr(hash('sha256', $secret_iv), 0, 16);
-  return openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $initialization_vector);
-}
 // try to make connection with DB -------------------------//-------------------------//-------------------------//
 if (isset($_POST['signup'])) {	
-	$username = clean($_POST['username']);
-	$email = clean($_POST['email']);
-	$password_1 = clean($_POST['password']);
-	$password_2 = clean($_POST['c_password']);
-	$first_name = clean($_POST['first_name']);
-	$last_name = clean($_POST['last_name']);
-	$birthday = clean($_POST['date_of_birth']);
-	$country = clean($_POST['country']);
+	$username = $class->clean($_POST['username']);
+	$email = $class->clean($_POST['email']);
+	$password_1 = $class->clean($_POST['password']);
+	$password_2 = $class->clean($_POST['c_password']);
+	$first_name = $class->clean($_POST['first_name']);
+	$last_name = $class->clean($_POST['last_name']);
+	$birthday = $class->clean($_POST['date_of_birth']);
+	$country = $class->clean($_POST['country']);
 	unset($_SESSION['error_list']);
 
 	if (empty($username)) { $errors['up']['username'] = "Username is required"; $errors['up_err']['username'] = 1; }
@@ -152,7 +115,7 @@ if (isset($_POST['signup'])) {
 		} else {
 			$ip_address = $_SERVER['REMOTE_ADDR'];
 		}
-		$current_user = clean($ip_address);
+		$current_user = $class->clean($ip_address);
 		try {
 			pg_query($db, 'begin');
 			$blacking = "INSERT INTO blacklist (ip) VALUES ('$current_user')";
@@ -172,13 +135,13 @@ if (isset($_POST['signup'])) {
 		header('location: /');
 	}
 	if (array_sum(array_values($errors['up_err'])) == 0) {
-		$hash_uname = enc($username);
-		$hash_mail = enc($email);
-		$hash_pw = enc($password_1);
-		$hash_fn = enc($first_name);
-		$hash_ln = enc($last_name);
-		$hash_bd = enc($birthday);
-		$hash_ct = enc($country);
+		$hash_uname = $class->enc($username);
+		$hash_mail = $class->enc($email);
+		$hash_pw = $class->enc($password_1);
+		$hash_fn = $class->enc($first_name);
+		$hash_ln = $class->enc($last_name);
+		$hash_bd = $class->enc($birthday);
+		$hash_ct = $class->enc($country);
 		$ppic = '/assets/none.jpg';
 
 		try {
@@ -200,8 +163,8 @@ if (isset($_POST['signup'])) {
 }
 
 if (isset($_GET['signin'])) {
-	$email = clean($_GET['email']);
-	$password = clean($_GET['password']);
+	$email = $class->clean($_GET['email']);
+	$password = $class->clean($_GET['password']);
 	unset($_SESSION['error_list']);
 	if (empty($email)) {$errors['in']['email'] = "Email is required"; $errors['in_err']['email'] = 1;}
 	if (empty($password)) {	$errors['in']['password'] = "Password is required";	$errors['in_err']['password'] = 1;	}
@@ -214,7 +177,7 @@ if (isset($_GET['signin'])) {
 		} else {
 			$ip_address = $_SERVER['REMOTE_ADDR'];
 		}
-		$current_user = clean($ip_address);
+		$current_user = $class->clean($ip_address);
 		try {
 			pg_query($db, 'begin');
 			$blacking = "INSERT INTO blacklist (ip) VALUES ('$current_user')";
@@ -229,8 +192,8 @@ if (isset($_GET['signin'])) {
 	}
 	if (array_sum(array_values($errors['up_err'])) == 0) {
 		$input = $password;
-		$hash_mail = enc($email);
-		$hash_pw = enc($input);
+		$hash_mail = $class->enc($email);
+		$hash_pw = $class->enc($input);
 		try {
 			pg_query($db, "begin");
 			$query = "SELECT * FROM users WHERE email='$hash_mail' AND password='$hash_pw'";				
@@ -247,14 +210,13 @@ if (isset($_GET['signin'])) {
 			foreach ($row as $key => $value) {
 				array_push($user_info, $value);
 			}
-			$_SESSION['username'] = dec($user_info[0]['username']);
+			$_SESSION['username'] = $class->dec($user_info[0]['username']);
 			header('location: '.GUI.'/main/');
 		}else {
 			$errors['in']['backup'] = "Wrong email/password combination";
 			$_SESSION['error_list'] = $errors['in'];
 			header('location: /');
 		}
-
 	}
 }
 ?>

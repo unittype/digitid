@@ -3,6 +3,11 @@
 DIGITID API 
 */
 session_start();
+include('classes.php');
+
+$database = new DB();
+$class = new AES();
+$db = $database->getConnection();
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -11,38 +16,8 @@ header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Credentials: true");
 
 if(isset($_GET['get_digitid']) && sizeof($_GET) == 3) :
-http_response_code(202);
-// Encription and Authentication
-class AES
-	{
-		private $encrypt_method = 'AES-256-CBC';
-		private $secret_key = 'U2FsdGVkX1+kUKGvV1ZWDEgvixMXVv0XKCnbpN16gDA=';
 
-		public function dec($string) {
-			$secret_iv = hash('sha256', $this->secret_key);
-		  	$key = hash('sha256', $secret_iv);
-			$initialization_vector = substr(hash('sha256', $secret_iv), 0, 16);
-			return openssl_decrypt(base64_decode($string), $this->encrypt_method, $key, 0, $initialization_vector);
-		}
-		public function enc($string){
-			$secret_iv = hash('sha256', $this->secret_key);
-			$key = hash('sha256', $secret_iv);
-			$initialization_vector = substr(hash('sha256', $secret_iv), 0, 16);
-			$a = openssl_encrypt($string, $this->encrypt_method, $key, 0, $initialization_vector);
-			return base64_encode($a);     
-		}
-		public function clean($string) {
-			//Strip whitespacefrom the beginning and end of a string
-			$string = trim($string);
-			//Un-quotes a quoted string
-			$string = stripslashes($string);
-			//Convert special characters to HTML entities
-			$string = htmlspecialchars($string);
-			return $string;
-		}
-	}
-
-	$class = new AES();
+	http_response_code(202);
 
 	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 		$ip_address = $_SERVER['HTTP_CLIENT_IP'];
@@ -54,21 +29,6 @@ class AES
 	$ip_addr = $class->clean($ip_address);
 
 	// definition of DB connection
-	define('DB_HOST', 'localhost');
-	define('DB_PORT', '5432');
-	define('DB_PASSWD', '----');
-	define('DB_USER', 'postgres');
-	define('DB_NAME', 'digitid');
-	try {
-		$db = pg_connect('host='.DB_HOST.' port='.DB_PORT.' password='.DB_PASSWD.' user='.DB_USER.' dbname='.DB_NAME.'');
-		if (!$db) {
-			$errors['db_conn'] = 'DB refucing connection';
-		}else{
-			$errors['db_conn'] = null;		
-		}
-	} catch (Exception $e) {
-		$errors['db_conn'] = 'Caught exception: '.$e->getMessage();
-	}
 
 	$init_arr  = array(
 			'id' => null,		
@@ -119,16 +79,17 @@ class AES
 				'firs_name' => $firs_name, 
 				'last_name' => $last_name,
 				'country' => $country,
-				'avatar' => $init_arr['picture']
+				'avatar' => $class->resize_image($init_arr['picture'], 0.44)
 				]
 			]);
 	}else {
 		/// Error 404 Not Found
+		http_response_code(404);
 		echo json_encode(['ok' => false, 'error_code' => 404, 'description' => 'Not Found']);	
 	}
 /// Error 400 Bad Request
-elseif(!isset($_GET['get_digitid']) || sizeof($_GET) != 4) :
-	http_response_code(404);
-	echo json_encode(['ok' => false, 'error_code' => 400, 'description' => 'Bad Request']);		
+elseif(isset($_GET['get_digitid']) || sizeof($_GET) != 3) :
+	http_response_code(400);
+	echo json_encode(['ok' => false, 'error_code' => 400, 'description' => 'Bad Request']);
 endif
 ?>

@@ -1,5 +1,11 @@
 <?php 
 session_start();
+include('../classes.php');
+
+$database = new DB();
+$class = new AES();
+$db = $database->getConnection();
+
 include('inner.php');
 if (!isset($_SESSION['client'])) {
 		header('location: /');
@@ -13,7 +19,7 @@ if (isset($_GET['logout'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DIGITID <?php echo date('Y')." | ".$cry->dec($profile['company_name']); ?></title>
+	<title>DIGITID <?php echo date('Y')." | ".$class->dec($profile['company_name']); ?></title>
 	<link rel="stylesheet" type="text/css" href="css/diid.css">
 	<meta name="viewport" content="width=device-width" />
 	<meta name="theme-color" content="#ffffff" />
@@ -25,8 +31,8 @@ if (isset($_GET['logout'])) {
 			<img class="user_image" src="<?php echo $profile['profile_picture']; ?>">
 			<div class="flex_row_center">
 				<div class="di_stat">
-					<div class="di_username"><?php echo $cry->dec($profile['company_name']);?></div>
-					<div id="di_name" class="flex_row_center"><div><?php echo $cry->dec($profile['first_name']);?></div><div><?php echo $cry->dec($profile['last_name']);?></div></div>
+					<div class="di_username"><?php echo $class->dec($profile['company_name']);?></div>
+					<div id="di_name" class="flex_row_center"><div><?php echo $class->dec($profile['first_name']);?></div><div><?php echo $class->dec($profile['last_name']);?></div></div>
 				</div>
 			</div>
 		</div>
@@ -69,7 +75,6 @@ if (isset($_GET['logout'])) {
 			</div> -->
 
 		</div>
-		<div id="copyright">&copy; 2019 DIGITID <?php echo isset($_SESSION['client']) ? $_SESSION['client'] : "none";?></div>
 	</div>
 </div>
 <script type="text/javascript">

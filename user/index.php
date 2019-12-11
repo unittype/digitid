@@ -2,6 +2,12 @@
 session_start();
 $session_id = session_id();
 
+include('classes.php');
+
+$database = new DB();
+$class = new AES();
+$db = $database->getConnection();
+
 include('load.php');
 
 if (isset($_SESSION['username'])) {
