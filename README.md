@@ -10,12 +10,9 @@ Need a little help? Feel free to make a contact.
 
 Prototype project to demonstrate GSA API Standards and API Documentation Template.
 
-### Request `GET` required
+### Request type `GET` required and example format in URL
 ```
-https:// 200 : ok
-
-
-
+https://example.com/?get_digitid&username=string&password=string
 ```
 ### Response types:
 * `200 : OK` 
@@ -30,8 +27,7 @@ https:// 200 : ok
       email : string
       firs_name : string
       last_name : string
-      country : string
-      date_of_birth : date
+      country : string      
       avatar : string (base64_encode)   
       ]   
 ```
